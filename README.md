@@ -1,4 +1,4 @@
-# 🧠 MSI-Net C++ / Python Inference (Apple Silicon)
+# 🧠 MSI-Net C++ / Python Inference
 
 Run **[MSI-Net](https://huggingface.co/alexanderkroner/MSI-Net)** — a saliency detection network — fully offline with:
 
