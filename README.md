@@ -10,7 +10,7 @@ Tested on **macOS Sonoma/Sequoia** for **M1/M2/M3**.
 
 ---
 
-![Output Example](./assets/onnx_result_overlay.png)]
+![Output Example](./assets/onnx_result_overlay.png)
 
 ---
 
