@@ -12,7 +12,7 @@
 
 using namespace std;
 
-// --- Target size selection (matches Python) ---
+// Choose target shape (320x320, 320x240, or 240x320) based on original aspect ratio
 static cv::Size choose_target_shape(const cv::Size& orig) {
     double ar = double(orig.height) / double(orig.width);
     auto d = [](double a, double b) { return std::abs(a - b); };
@@ -24,11 +24,13 @@ static cv::Size choose_target_shape(const cv::Size& orig) {
     return {240, 320};
 }
 
+// Letterbox structure to hold preprocessed tensor and padding info
 struct Letterbox {
     cv::Mat tensor;  // HxWxC float32, RGB, 0..255
     int top = 0, bottom = 0, left = 0, right = 0;
 };
 
+// Preprocess BGR image: convert to RGB, resize with aspect ratio, pad to target shape
 static Letterbox preprocess_bgr(const cv::Mat& img_bgr) {
     cv::Mat img_rgb;
     cv::cvtColor(img_bgr, img_rgb, cv::COLOR_BGR2RGB);
@@ -58,6 +60,7 @@ static Letterbox preprocess_bgr(const cv::Mat& img_bgr) {
     return {padded, top, bottom, left, right};
 }
 
+// Postprocess output saliency map: crop padding and resize to original size
 static cv::Mat postprocess_to_original(const cv::Mat& out_map, int top, int bottom,
                                        int left, int right, const cv::Size& orig) {
     int H = out_map.rows, W = out_map.cols;
